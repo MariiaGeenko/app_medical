@@ -24,6 +24,18 @@ services:
         ports:
             - '5590:3306'
 
+    postgres:
+        image: 'postgres:11.1-alpine'
+        working_dir: /app
+        volumes:
+            - '.:/app'
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=111
+            - POSTGRES_DB=my_receipt
+        ports:
+            - '5592:5432'
+
     webserver:
         image: 'nginx:alpine'
         working_dir: /app

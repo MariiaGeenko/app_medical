@@ -33,6 +33,7 @@ Service|Address outside containers
 Webserver|[localhost:5588](http://localhost:5588)
 Mailhog web interface|[localhost:5589](http://localhost:5589)
 MySQL|**host:** `localhost`; **port:** `5590`
+PostgreSQL|**host:** `localhost`; **port:** `5592`
 
 ## Hosts within your environment ##
 
@@ -42,6 +43,7 @@ Service|Hostname|Port number
 ------|---------|-----------
 php-fpm|php-fpm|9000
 MySQL|mysql|3306 (default)
+Postgres|postgres|5432 (default)
 Redis|redis|6379 (default)
 SMTP (Mailhog)|mailhog|1025 (default)
 

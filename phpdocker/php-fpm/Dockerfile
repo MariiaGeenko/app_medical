@@ -4,6 +4,7 @@ WORKDIR "/app"
 RUN apt-get update; \
     apt-get -y --no-install-recommends install \
         php8.1-mysql \ 
+        php8.1-pgsql \ 
         php8.1-redis \ 
         php8.1-xdebug; \
     apt-get clean; \
