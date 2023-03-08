@@ -8,7 +8,6 @@ use App\Models\Documents\Receipt;
 use App\Models\Documents\SickList;
 use App\Models\Meeting;
 use App\Models\Speciality;
-use App\Models\Subjects\Organizations\EducationOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,7 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property array $clinic_ids
  * @property string $name
  * @property string $surname
- * @property EducationOrganization $educationOrganization
+ * @property Organization $educationOrganization
  * @property Clinic[] $clinics
  * @property Speciality $speciality
  * @property DoctorReview[] $reviews
@@ -56,7 +55,7 @@ class Doctor extends Model
 
     function educationOrganization(): BelongsTo
     {
-        return $this->belongsTo(EducationOrganization::class);
+        return $this->belongsTo(Organization::class);
     }
 
     function clinics(): BelongsToMany

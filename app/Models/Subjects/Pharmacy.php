@@ -20,7 +20,7 @@ use Illuminate\Support\Carbon;
  * @property array $working_modes
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property PharmacyOrganization $organization
+ * @property Organization $organization
  */
 class Pharmacy extends Model
 {
@@ -40,7 +40,7 @@ class Pharmacy extends Model
     }
     function organization(): BelongsTo
     {
-        return $this->belongsTo(PharmacyOrganization::class);
+        return $this->belongsTo(Organization::class);
     }
 
     protected $casts = [

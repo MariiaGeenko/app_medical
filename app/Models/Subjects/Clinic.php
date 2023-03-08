@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Models\Subjects;
 
-use App\Models\Subjects\Organizations\ClinicOrganization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $email
  * @property string $gps_coordinates
  * @property array $working_modes
+ * @property Organization $organization
  */
 class Clinic extends Model
 {
@@ -44,7 +44,7 @@ class Clinic extends Model
     }
     function organization(): BelongsTo
     {
-        return $this->belongsTo(ClinicOrganization::class);
+        return $this->belongsTo(Organization::class);
     }
 
 
