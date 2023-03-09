@@ -27,5 +27,5 @@ class PaymentType extends Model
     {
         return $this->hasMany(Payment::class);
     }
-    public $timestamps = false;
+    public $timestamps = true;
 }

@@ -23,5 +23,5 @@ class Message extends Model
         'message',
         'sender_is_patient'
     ];
-    public $timestamps = false;
+    public $timestamps = true;
 }

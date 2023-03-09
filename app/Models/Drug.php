@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id;
- * @property array $availability_pharmacies_ids
  * @property string $description_url
  * @property Receipt[] $receipts
  */

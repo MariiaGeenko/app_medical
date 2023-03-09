@@ -41,5 +41,5 @@ class SickList extends Model
         return $this->belongsTo(Doctor::class);
     }
 
-    public $timestamps = false;
+    public $timestamps = true;
 }

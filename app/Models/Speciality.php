@@ -27,5 +27,5 @@ class Speciality extends Model
         return $this->hasMany(Doctor::class);
     }
 
-    public $timestamps = false;
+    public $timestamps = true;
 }

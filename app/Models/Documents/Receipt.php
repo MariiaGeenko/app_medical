@@ -48,5 +48,5 @@ class Receipt extends Model
         'created_date' => 'datetime',
         'valid_until_date' => 'datetime'
     ];
-    public $timestamps = false;
+    public $timestamps = true;
 }

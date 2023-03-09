@@ -19,5 +19,5 @@ class DoctorStatus extends Model
         'name',
         'description'
     ];
-    public $timestamps = false;
+    public $timestamps = true;
 }
