@@ -15,14 +15,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('failed_jobs', static function (Blueprint $table) {
+        Schema::create('receipts', static function (Blueprint $table) {
             $table->id();
-            $table->string('uuid')->unique();
-            $table->text('connection');
-            $table->text('queue');
-            $table->longText('payload');
-            $table->longText('exception');
-            $table->timestamp('failed_at')->useCurrent();
+            $table->foreignId('patient_id')->constrained();
+            $table->foreignId('doctor_id')->constrained();
+            $table->string('name');
+            $table->timestamps();
+            $table->date('valid_until_date');
+            $table->foreignId('drug_id')->constrained();
+            $table->string('barcode');
         });
     }
 
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('receipts');
     }
 };

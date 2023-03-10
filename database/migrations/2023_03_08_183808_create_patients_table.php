@@ -15,14 +15,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('failed_jobs', static function (Blueprint $table) {
+        Schema::create('patients', static function (Blueprint $table) {
             $table->id();
-            $table->string('uuid')->unique();
-            $table->text('connection');
-            $table->text('queue');
-            $table->longText('payload');
-            $table->longText('exception');
-            $table->timestamp('failed_at')->useCurrent();
+            $table->timestamps();
+            $table->string('refresh_token');
+            $table->string('access_token');
+            $table->boolean('is_online');
+            $table->string('name');
+            $table->string('surname');
+            $table->string('barcode');
+            $table->id('medical_card_stored_in_clinic_id');
         });
     }
 
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('patients');
     }
 };
