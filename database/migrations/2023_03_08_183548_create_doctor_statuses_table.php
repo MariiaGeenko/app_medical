@@ -15,13 +15,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('doctors_reviews', static function (Blueprint $table) {
+        Schema::create('doctor_statuses', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->constrained();
-            $table->foreignId('doctor_id')->constrained();
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->float('rank');
+            $table->string('name');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('doctors_reviews');
+        Schema::dropIfExists('doctor_statuses');
     }
 };

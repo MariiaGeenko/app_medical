@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('gps_coordinates');
             $table->json('working_modes');
-            $table->id('organization_id');
+            $table->foreignId('organization_id');
             $table->timestamps();
         });
     }

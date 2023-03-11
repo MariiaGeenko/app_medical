@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('barcode');
-            $table->id('medical_card_stored_in_clinic_id');
+            $table->foreignId('medical_card_stored_in_clinic_id');
         });
     }
 

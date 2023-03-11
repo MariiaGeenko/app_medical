@@ -22,11 +22,11 @@ return new class extends Migration
             $table->string('refresh_token');
             $table->string('access_token');
             $table->boolean('is_online');
-            $table->id('speciality_id');
+            $table->foreignId('speciality_id');
             $table->string('name');
             $table->string('surname');
-            $table->id('education_organization_id');
-            $table->id('status_id');
+            $table->foreignId('education_organization_id');
+            $table->foreignId('status_id');
         });
     }
 

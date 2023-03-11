@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('gps_coordinates');
             $table->json('working_modes');
             $table->foreignId('organization_id')->constrained();
+            $table->timestamps();
         });
     }
 

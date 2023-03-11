@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('surname');
             $table->foreignId('education_organization_id')->constrained('organizations');
             $table->foreignId('status_id')->constrained('doctor_statuses');
-            $table->timestamps();
         });
     }
 
