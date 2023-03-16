@@ -25,6 +25,7 @@ class Meeting extends Model
         'description',
         'result',
         'written_entities',
+        'address'
     ];
 
     function videoCalls(): HasMany

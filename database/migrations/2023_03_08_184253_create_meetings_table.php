@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('doctor_id')->constrained();
             $table->text('description');
             $table->text('result');
-            $table->json('written_entities');
+            $table->string('written_entities');
             $table->foreignId('service_id')->constrained();
             $table->date('date');
             $table->timestamps();

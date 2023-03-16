@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('doctors', static function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->json('working_mode');
+            $table->string('working_mode')->nullable();
             $table->string('refresh_token');
             $table->string('access_token');
             $table->boolean('is_online');

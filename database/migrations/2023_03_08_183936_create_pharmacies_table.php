@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('gps_coordinates');
-            $table->json('working_modes');
+            $table->string('working_modes');
             $table->foreignId('organization_id')->constrained();
             $table->timestamps();
         });
