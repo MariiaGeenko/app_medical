@@ -15,15 +15,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personal_access_tokens', static function (Blueprint $table) {
+        Schema::create('patients', static function (Blueprint $table) {
             $table->id();
-            $table->morphs('tokenable');
-            $table->string('name');
-            $table->string('token', 64)->unique();
-            $table->text('abilities')->nullable();
-            $table->timestamp('last_used_at')->nullable();
-            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
+            $table->string('refresh_token');
+            $table->string('access_token');
+            $table->boolean('is_online');
+            $table->string('name');
+            $table->string('surname');
+            $table->string('barcode');
+            $table->foreignId('medical_card_stored_in_clinic_id')->constrained('clinics');
         });
     }
 
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personal_access_tokens');
+        Schema::dropIfExists('patients');
     }
 };

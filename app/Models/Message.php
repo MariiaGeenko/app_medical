@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models;
@@ -18,10 +19,15 @@ class Message extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'recipient_id',
-        'sender_id',
-        'message',
-        'sender_is_patient'
+        'address',
+        'phone',
+        'email',
+        'gps_coordinates',
+        'working_modes'
     ];
+    protected $casts = [
+        'working_modes' => 'array',
+    ];
+
     public $timestamps = true;
 }

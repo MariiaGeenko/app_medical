@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\DBTestController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
