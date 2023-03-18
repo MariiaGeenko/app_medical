@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class Sick_listSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class Sick_listSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('sick_lists')->insert($this->getData());
+        DB::table('sick_lists')->insert($this->getData());
     }
 
     private function getData(): array

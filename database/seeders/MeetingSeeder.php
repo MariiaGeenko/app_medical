@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MeetingSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class MeetingSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('meetings')->insert($this->getData());
+        DB::table('meetings')->insert($this->getData());
     }
 
     private function getData(): array

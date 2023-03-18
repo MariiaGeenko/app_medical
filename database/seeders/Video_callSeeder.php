@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class Video_callSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class Video_callSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('video_calls')->insert($this->getData());
+        DB::table('video_calls')->insert($this->getData());
     }
 
     private function getData(): array

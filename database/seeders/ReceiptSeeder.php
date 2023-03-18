@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ReceiptSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class ReceiptSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('receipts')->insert($this->getData());
+        DB::table('receipts')->insert($this->getData());
     }
 
     private function getData(): array
