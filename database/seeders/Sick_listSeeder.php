@@ -25,7 +25,7 @@ class Sick_listSeeder extends Seeder
         $data = [];
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
-                'patient_id' => random_int(1, 5),
+                'patient_id' => random_int(11, 20),
                 'doctor_id' => random_int(1, 5),
                 'description' => \fake()->text(10),
                 'created_at' => \now(),
