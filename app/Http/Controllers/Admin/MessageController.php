@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\QueryBuilders\MessagesQueryBuilder;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -12,9 +14,12 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(MessagesQueryBuilder $messagesQueryBuilder): View
     {
-        return \view('admin.messages.index');
+        $messagesList = $messagesQueryBuilder->getMessagesWithPagination();
+        return \view('admin.messages.index', [
+            'messagesList' => $messagesList
+        ]);
     }
 
     /**
@@ -22,9 +27,9 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return \view('admin.messages.create');
     }
 
     /**

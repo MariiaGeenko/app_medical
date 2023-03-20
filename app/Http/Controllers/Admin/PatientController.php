@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\QueryBuilders\PatientsQueryBuilder;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -12,10 +14,12 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    { {
-            return \view('admin.patients.index');
-        }
+    public function index(PatientsQueryBuilder $patientsQueryBuilder): View
+    {
+        $patientsList = $patientsQueryBuilder->getPatientsWithPagination();
+        return \view('admin.patients.index', [
+            'patientsList' => $patientsList
+        ]);
     }
 
     /**
@@ -23,9 +27,9 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return \view('admin.patients.create');
     }
 
     /**

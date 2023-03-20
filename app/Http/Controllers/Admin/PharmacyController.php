@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\QueryBuilders\PharmaciesQueryBuilder;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class PharmacyController extends Controller
@@ -12,10 +14,12 @@ class PharmacyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    { {
-            return \view('admin.pharmacies.index');
-        }
+    public function index(PharmaciesQueryBuilder $pharmaciesQueryBuilder): View
+    {
+        $pharmaciesList = $pharmaciesQueryBuilder->getPharmaciesWithPagination();
+        return \view('admin.pharmacies.index', [
+            'pharmaciesList' => $pharmaciesList
+        ]);
     }
 
     /**
@@ -23,9 +27,9 @@ class PharmacyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return \view('admin.pharmacies.create');
     }
 
     /**

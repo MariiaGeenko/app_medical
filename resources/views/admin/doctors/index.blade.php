@@ -19,8 +19,9 @@
       <thead>
         <tr>
           <th>#ID</th>
-          <th>Название</th>       
-          <th>Описание</th>
+          <th>Имя</th>       
+          <th>Фамилия</th>
+          <th>Часы приема</th>
           <th>Дата добавления</th>
           <th>Дата изменения</th>
           <th>Статус</th>
@@ -28,22 +29,23 @@
         </tr>
       </thead>
       <tbody>
-        {{-- @forelse ($doctorsList as $doctor)
+        @forelse ($doctorsList as $doctor)
         <tr>
           <td>{{ $doctor->id }}</td>
-          <td>{{ $doctor->title }}</td>  
-          <td>{{ $doctor->description }}</td>
+          <td>{{ $doctor->name }}</td>  
+          <td>{{ $doctor->surname }}</td>
+          <td>{{ $doctor->working_modes }}</td>
           <td>{{ $doctor->created_at }}</td>
           <td>{{ $doctor->updated_at }}</td>
-          <td>{{ $doctor->status }}</td>
+          {{-- <td>{{ $doctor->status }}</td> --}}
           {{-- <td><a href="{{route('admin.doctors.edit', $doctor->id)}}">Изм.</a> &nbsp; <a href="javascript:;" class="delete" rel="{{ $doctor->id }}" style=" color: red;">Уд.</a></td> --}}
-          {{-- <td><a href="#">Изм.</a> &nbsp; <a href="#">Вкл.</a> &nbsp; <a href="#" class="delete" style=" color: red;">Выкл.</a></td>
+          {{-- <td><a href="#">Изм.</a> &nbsp; <a href="#">Вкл.</a> &nbsp; <a href="#" class="delete" style=" color: red;">Выкл.</a></td> --}}
         </tr>            
         @empty
         <tr>
           <td colspan="7">Записей нет</td>
         </tr>            
-        @endforelse --}}
+        @endforelse
       </tbody>
 
     </table>

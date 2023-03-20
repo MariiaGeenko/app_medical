@@ -19,8 +19,9 @@
       <thead>
         <tr>
           <th>#ID</th>
-          <th>Название</th>       
-          <th>Описание</th>
+          <th>Имя</th>       
+          <th>Фамилия</th>
+          <th>Номер медкарты</th>
           <th>Дата добавления</th>
           <th>Дата изменения</th>
           <th>Статус</th>
@@ -28,22 +29,23 @@
         </tr>
       </thead>
       <tbody>
-        {{-- @forelse ($patientsList as $patient)
+        @forelse ($patientsList as $patient)
         <tr>
           <td>{{ $patient->id }}</td>
-          <td>{{ $patient->title }}</td>  
-          <td>{{ $patient->description }}</td>
+          <td>{{ $patient->name }}</td>  
+          <td>{{ $patient->surname }}</td>
+          <td>{{ $patient->medical_card_stored_in_clinic_id }}</td>
           <td>{{ $patient->created_at }}</td>
           <td>{{ $patient->updated_at }}</td>
-          <td>{{ $patient->status }}</td>
+          {{-- <td>{{ $patient->status }}</td> --}}
           {{-- <td><a href="{{route('admin.patients.edit', $patient->id)}}">Изм.</a> &nbsp; <a href="javascript:;" class="delete" rel="{{ $patient->id }}" style=" color: red;">Уд.</a></td> --}}
-          {{-- <td><a href="#">Изм.</a> &nbsp; <a href="#">Вкл.</a> &nbsp; <a href="#" class="delete" style=" color: red;">Выкл.</a></td>
+          {{-- <td><a href="#">Изм.</a> &nbsp; <a href="#">Вкл.</a> &nbsp; <a href="#" class="delete" style=" color: red;">Выкл.</a></td> --}}
         </tr>            
         @empty
         <tr>
           <td colspan="7">Записей нет</td>
         </tr>            
-        @endforelse --}}
+        @endforelse
       </tbody>
 
     </table>

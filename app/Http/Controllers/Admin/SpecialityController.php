@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\QueryBuilders\SpecialitiesQueryBuilder;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class SpecialityController extends Controller
@@ -12,10 +14,12 @@ class SpecialityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    { {
-            return \view('admin.specialities.index');
-        }
+    public function index(SpecialitiesQueryBuilder $specialitiesQueryBuilder): View
+    {
+        $specialitiesList = $specialitiesQueryBuilder->getSpecialitiesWithPagination();
+        return \view('admin.specialities.index', [
+            'specialitiesList' => $specialitiesList
+        ]);
     }
 
     /**
@@ -23,9 +27,9 @@ class SpecialityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return \view('admin.specialities.create');
     }
 
     /**

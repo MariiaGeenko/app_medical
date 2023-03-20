@@ -5,12 +5,12 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
     <h1 class="h2">Сообщения</h1>
     {{-- <div class="col-4 d-flex justify-content-end align-items-center">
-      <a class="btn btn-sm btn-outline-secondary" href="{{route('admin.certificates.create')}}">Добавить страницу</a>
+      <a class="btn btn-sm btn-outline-secondary" href="{{route('admin.messages.create')}}">Добавить страницу</a>
     </div> --}}
     <div class="btn-toolbar mb-2 mb-md-0">
       <div class="btn-group mr-2">
-        <button class="btn btn-sm btn-outline-secondary">Share</button>
-        <button class="btn btn-sm btn-outline-secondary">Export</button>
+        {{-- <button class="btn btn-sm btn-outline-secondary">Share</button>
+        <button class="btn btn-sm btn-outline-secondary">Export</button> --}}
       </div>
     </div>
   </div>
@@ -29,24 +29,24 @@
         </tr>
       </thead>
       <tbody>
-        {{-- @forelse ($messagesList as $message)
+        @forelse ($messagesList as $message)
         <tr>
           <td>{{ $message->id }}</td>
-          <td>{{ $message->recipient }}</td>
-          <td>{{ $message->sender }}</td>         
+          <td>{{ $message->recipient_id }}</td>
+          <td>{{ $message->sender_id }}</td>         
           <td>{{ $message->message }}</td>
           <td>{{ $message->created_at }}</td>
           <td>{{ $message->updated_at }}</td>
-          <td>{{ $message->status }}</td>
+          {{-- <td>{{ $message->status }}</td> --}}
           <td></td>
           {{-- <td><a href="{{route('admin.pages.edit', $page->id)}}">Изм.</a> &nbsp; <a href="javascript:;" class="delete" rel="{{ $page->id }}" style=" color: red;">Уд.</a></td> --}}
           {{-- <td><a href="#">Изм.</a> &nbsp; <a href="#">Вкл.</a> &nbsp; <a href="#" class="delete" style=" color: red;">Выкл.</a></td> --}}
-        {{-- </tr>            
+        </tr>            
         @empty
         <tr>
           <td colspan="7">Записей нет</td>
         </tr>            
-        @endforelse --}}
+        @endforelse
       </tbody>
 
     </table>

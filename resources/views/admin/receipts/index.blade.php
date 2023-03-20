@@ -20,7 +20,7 @@
         <tr>
           <th>#ID</th>
           <th>Название</th>       
-          <th>Описание</th>
+          <th>Годен до</th>
           <th>Дата добавления</th>
           <th>Дата изменения</th>
           <th>Статус</th>
@@ -28,22 +28,21 @@
         </tr>
       </thead>
       <tbody>
-        {{-- @forelse ($receiptsList as $receipt)
+        @forelse ($receiptsList as $receipt)
         <tr>
           <td>{{ $receipt->id }}</td>
-          <td>{{ $receipt->title }}</td>  
-          <td>{{ $receipt->description }}</td>
+          <td>{{ $receipt->name }}</td>  
+          <td>{{ $receipt->valid_untill_date }}</td>
           <td>{{ $receipt->created_at }}</td>
           <td>{{ $receipt->updated_at }}</td>
-          <td>{{ $receipt->status }}</td>
-          {{-- <td><a href="{{route('admin.receipts.edit', $receipt->id)}}">Изм.</a> &nbsp; <a href="javascript:;" class="delete" rel="{{ $receipt->id }}" style=" color: red;">Уд.</a></td> --}}
-          {{-- 
+          {{-- <td>{{ $receipt->status }}</td> --}}
+           {{-- <td><a href="{{route('admin.receipts.edit', $receipt->id)}}">Изм.</a> &nbsp; <a href="javascript:;" class="delete" rel="{{ $receipt->id }}" style=" color: red;">Уд.</a></td>  --}}
         </tr>            
         @empty
         <tr>
           <td colspan="7">Записей нет</td>
         </tr>            
-        @endforelse --}}
+        @endforelse
       </tbody>
 
     </table>

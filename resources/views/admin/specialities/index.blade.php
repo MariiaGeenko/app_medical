@@ -28,22 +28,21 @@
         </tr>
       </thead>
       <tbody>
-        {{-- @forelse ($specialitiesList as $speciality)
+        @forelse ($specialitiesList as $speciality)
         <tr>
           <td>{{ $speciality->id }}</td>
-          <td>{{ $speciality->title }}</td>  
+          <td>{{ $speciality->name }}</td>  
           <td>{{ $speciality->description }}</td>
           <td>{{ $speciality->created_at }}</td>
           <td>{{ $speciality->updated_at }}</td>
-          <td>{{ $speciality->status }}</td>
-          {{-- <td><a href="{{route('admin.specialities.edit', $speciality->id)}}">Изм.</a> &nbsp; <a href="javascript:;" class="delete" rel="{{ $speciality->id }}" style=" color: red;">Уд.</a></td> --}}
-          {{-- 
+          {{-- <td>{{ $speciality->status }}</td> --}}
+          {{-- <td><a href="{{route('admin.specialities.edit', $speciality->id)}}">Изм.</a> &nbsp; <a href="javascript:;" class="delete" rel="{{ $speciality->id }}" style=" color: red;">Уд.</a></td> --}}           
         </tr>            
         @empty
         <tr>
           <td colspan="7">Записей нет</td>
         </tr>            
-        @endforelse --}}
+        @endforelse
       </tbody>
 
     </table>

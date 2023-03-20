@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\QueryBuilders\ReceiptsQueryBuilder;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
@@ -12,10 +14,12 @@ class ReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    { {
-            return \view('admin.receipts.index');
-        }
+    public function index(ReceiptsQueryBuilder $receiptsQueryBuilder): View
+    {
+        $receiptsList = $receiptsQueryBuilder->getReceiptsWithPagination();
+        return \view('admin.receipts.index', [
+            'receiptsList' => $receiptsList
+        ]);
     }
 
     /**
@@ -23,9 +27,9 @@ class ReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return \view('admin.receipts.create');
     }
 
     /**
