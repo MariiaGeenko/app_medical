@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DoctorStatusSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class DoctorStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('doctor_statuses')->insert($this->getData());
+        DB::table('doctor_statuses')->insert($this->getData());
     }
 
     private function getData(): array

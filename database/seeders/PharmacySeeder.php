@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PharmacySeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class PharmacySeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('messages')->insert($this->getData());
+        DB::table('pharmacies')->insert($this->getData());
     }
 
     private function getData(): array
@@ -29,7 +30,7 @@ class PharmacySeeder extends Seeder
                 'email' => \fake()->email(),
                 'gps_coordinates' => \fake()->swiftBicNumber(),
                 'working_modes' => \fake()->text(10),
-                'organization_id' => random_int(1, 5),
+                'organization_id' => random_int(1, 10),
                 'created_at' => \now(),
                 'updated_at' => \now(),
             ];
