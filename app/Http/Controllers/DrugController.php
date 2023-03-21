@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\QueryBuilders\DrugsQueryBuilder;
+
 
 class DrugController extends Controller
 {
@@ -14,4 +17,11 @@ class DrugController extends Controller
     {
         return (\view('drugs.index'));
     }
+
+    public function store(Request $request, DrugsQueryBuilder $drugsQueryBuilder): string
+    {
+        return $drugsQueryBuilder->getAll()->toJson();
+
+    }
+
 }

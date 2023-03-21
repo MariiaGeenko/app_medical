@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 
-declare(strict_types=1);
+
 
 use App\Http\Controllers\DBTestController;
 use App\Http\Controllers\MainController;
@@ -59,6 +60,8 @@ use Inertia\Inertia;
 |
 */
 
+
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -67,6 +70,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -78,25 +82,26 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function () {
-    Route::get('/', [AdminIndexController::class, 'index'])->name('admin');
-    Route::resource('main', AdminMainController::class);
-    Route::resource('drugs', AdminDrugController::class);
-    Route::resource('messages', AdminMessageController::class);
-    Route::resource('clinics', AdminClinicController::class);
-    Route::resource('doctors', AdminDoctorController::class);
-    Route::resource('doctor_reviews', AdminDoctor_reviewController::class);
-    Route::resource('meetings', AdminMeetingController::class);
-    Route::resource('organizations', AdminOrganizationController::class);
-    Route::resource('patients', AdminPatientController::class);
-    Route::resource('pharmacies', AdminPharmacyController::class);
-    Route::resource('receipts', AdminReceiptController::class);
-    Route::resource('services', AdminServiceController::class);
-    Route::resource('specialities', AdminSpecialityController::class);
-    Route::resource('video_calls', AdminVideo_callController::class);
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function () {
+        Route::get('/', [AdminIndexController::class, 'index'])->name('admin');
+        Route::resource('main', AdminMainController::class);
+        Route::resource('drugs', AdminDrugController::class);
+        Route::resource('messages', AdminMessageController::class);
+        Route::resource('clinics', AdminClinicController::class);
+        Route::resource('doctors', AdminDoctorController::class);
+        Route::resource('doctor_reviews', AdminDoctor_reviewController::class);
+        Route::resource('meetings', AdminMeetingController::class);
+        Route::resource('organizations', AdminOrganizationController::class);
+        Route::resource('patients', AdminPatientController::class);
+        Route::resource('pharmacies', AdminPharmacyController::class);
+        Route::resource('receipts', AdminReceiptController::class);
+        Route::resource('services', AdminServiceController::class);
+        Route::resource('specialities', AdminSpecialityController::class);
+        Route::resource('video_calls', AdminVideo_callController::class);
 
-    Route::resource('users', AdminUserController::class);
+        Route::resource('users', AdminUserController::class);
 
+    });
 });
 
 require __DIR__.'/auth.php';
