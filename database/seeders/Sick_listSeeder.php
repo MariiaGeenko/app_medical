@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class Sick_listSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class Sick_listSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('sick_lists')->insert($this->getData());
+        DB::table('sick_lists')->insert($this->getData());
     }
 
     private function getData(): array
@@ -24,7 +25,7 @@ class Sick_listSeeder extends Seeder
         $data = [];
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
-                'patient_id' => random_int(1, 5),
+                'patient_id' => random_int(11, 20),
                 'doctor_id' => random_int(1, 5),
                 'description' => \fake()->text(10),
                 'created_at' => \now(),

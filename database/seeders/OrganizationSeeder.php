@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class OrganizationSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class OrganizationSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('organizations')->insert($this->getData());
+        DB::table('organizations')->insert($this->getData());
     }
 
     private function getData(): array

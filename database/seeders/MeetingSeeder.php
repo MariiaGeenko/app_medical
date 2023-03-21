@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MeetingSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class MeetingSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('meetings')->insert($this->getData());
+        DB::table('meetings')->insert($this->getData());
     }
 
     private function getData(): array
@@ -24,12 +25,12 @@ class MeetingSeeder extends Seeder
         $data = [];
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
-                'patient_id' => random_int(1, 5),
+                'patient_id' => random_int(11, 20),
                 'doctor_id' => random_int(1, 5),
                 'description' => \fake()->text(10),
                 'result' => \fake()->text(10),
                 'written_entities' => \fake()->text(10),
-                'service_id' => random_int(15, 20),
+                'service_id' => random_int(1, 10),
                 'date' => date_create(),
                 'created_at' => \now(),
                 'updated_at' => \now(),

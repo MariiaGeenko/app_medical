@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PatientSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class PatientSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('patients')->insert($this->getData());
+        DB::table('patients')->insert($this->getData());
     }
 
     private function getData(): array
@@ -32,7 +33,7 @@ class PatientSeeder extends Seeder
                 'name' => \fake()->name(),
                 'surname' => \fake()->name(),
                 'barcode' => \fake()->text(10),
-                'medical_card_stored_in_clinic_id' => random_int(1, 10),
+                'medical_card_stored_in_clinic_id' => random_int(11, 20),
 
             ];
         }

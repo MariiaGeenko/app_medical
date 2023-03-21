@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\QueryBuilders\DrugsQueryBuilder;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class DrugController extends Controller
@@ -12,9 +14,12 @@ class DrugController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DrugsQueryBuilder $drugsQueryBuilder): View
     {
-        return \view('admin.drugs.index');
+        $drugsList = $drugsQueryBuilder->getDrugsWithPagination();
+        return \view('admin.drugs.index', [
+            'drugsList' => $drugsList
+        ]);
     }
 
     /**
@@ -22,9 +27,9 @@ class DrugController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return \view('admin.drugs.create');
     }
 
     /**
