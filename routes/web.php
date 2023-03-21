@@ -1,5 +1,9 @@
 <?php
 
+
+use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Application;
+
 declare(strict_types=1);
 
 use App\Http\Controllers\DBTestController;
@@ -40,7 +44,9 @@ use \App\Http\Controllers\Sick_listsController;
 use \App\Http\Controllers\SpecialitiesController;
 use \App\Http\Controllers\Video_callsController;
 
+
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,10 +60,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
-Route::get('/', [MainController::class, 'index'])->name('main');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function () {
     Route::get('/', [AdminIndexController::class, 'index'])->name('admin');
@@ -77,26 +96,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function () {
     Route::resource('video_calls', AdminVideo_callController::class);
 
     Route::resource('users', AdminUserController::class);
+
 });
 
-Route::get('/drugs', [DrugController::class, 'index'])->name('drugs');
-Route::get('/messages', [MessageController::class, 'index'])->name('messages');
-Route::get('/clinics', [ClinicsController::class, 'index'])->name('clinics');
-Route::get('/doctor_reviews', [Doctor_reviewsController::class, 'index'])->name('doctor_reviews');
-Route::get('/doctors', [DoctorsController::class, 'index'])->name('doctors');
-Route::get('/medical_cards', [Medical_cardController::class, 'index'])->name('medical_cards');
-Route::get('/meetings', [MeetingsController::class, 'index'])->name('meetings');
-Route::get('/organizations', [OrganizationsController::class, 'index'])->name('organizations');
-Route::get('/patients', [PatientsController::class, 'index'])->name('patients');
-Route::get('/payment_statuses', [Payment_statusesController::class, 'index'])->name('payment_statuses');
-Route::get('/payment_types', [Payment_typesController::class, 'index'])->name('payment_types');
-Route::get('/payments', [PaymentsController::class, 'index'])->name('payments');
-Route::get('/pharmacies', [PharmaciesController::class, 'index'])->name('pharmacies');
-Route::get('/receipts', [ReceiptsController::class, 'index'])->name('receipts');
-Route::get('/services', [ServicesController::class, 'index'])->name('services');
-Route::get('/sick_lists', [Sick_listsController::class, 'index'])->name('sick_lists');
-Route::get('/specialities', [SpecialitiesController::class, 'index'])->name('specialities');
-Route::get('/video_calls', [Video_callsController::class, 'index'])->name('video_calls');
-
-
-Route::get('dbtest', DBTestController::class);
+require __DIR__.'/auth.php';
