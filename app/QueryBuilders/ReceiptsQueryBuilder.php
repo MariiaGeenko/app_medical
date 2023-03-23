@@ -31,4 +31,9 @@ final class ReceiptsQueryBuilder extends QueryBuilder
     {
         return $this->model->paginate($quantity);
     }
+    public function getReceiptsByDrugId (int $drugId): Collection
+    {
+        return Receipt::query()->where('drug_id', $drugId)->get();
+    }
+
 }

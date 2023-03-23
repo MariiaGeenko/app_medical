@@ -31,4 +31,9 @@ final class ClinicsQueryBuilder extends QueryBuilder
     {
         return $this->model->paginate($quantity);
     }
+  //  public function getClinicsWithPagination(int $quantity = 10): LengthAwarePaginator
+   // {
+   //     return $this->model->paginate($quantity);
+   // }
+
 }
