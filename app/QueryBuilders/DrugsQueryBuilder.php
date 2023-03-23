@@ -3,11 +3,12 @@
 namespace App\QueryBuilders;
 
 use App\Models\Drug;
-use App\Models\Pharmacy;
+use App\Models\Subjects\Pharmacy;
 use App\QueryBuilders\QueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 
 final class DrugsQueryBuilder extends QueryBuilder
@@ -34,15 +35,19 @@ final class DrugsQueryBuilder extends QueryBuilder
         return $this->model->paginate($quantity);
     }
 
-    public function getDrugsByPharmacyId (int $pharmacyId): Collection
+   // public function getDrugsByPharmacyId (int $pharmacyId): Collection
+  //  {
+  //      return Drugs::query()->where('pharmacies_id', $pharmacyId)->get();
+  //  }
+
+    public function getPharmaciesByDrugId (int $drugId): \Illuminate\Support\Collection
     {
-        return Drugs::query()->where('pharmacies_id', $pharmacyId)->get();
+       return $drugs = DB::table('drugs')
+            ->leftjoin('receipts', 'receipts.drug_id', '=', 'drugs.id')
+            ->leftjoin('pharmacies', 'pharmacies.id', '=', 'drugs.pharmacies_id')
+            ->select('drugs.name', 'pharmacies.address')
+            ->get();
     }
 
-    public function getPharmaciesByDrugId (int $drugId): Collection
-    {
-        return Pharmacy::query()->where('pharmacies_id', $pharmacyId)->get();
-    }
 
-    
 }

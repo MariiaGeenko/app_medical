@@ -34,6 +34,7 @@ class PharmacySeeder extends Seeder
                 'created_at' => \now(),
                 'updated_at' => \now(),
                 'organization_types_id' => random_int(1, 10),
+                'name' => \fake()->name(),
             ];
         }
 
