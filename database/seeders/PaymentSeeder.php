@@ -17,7 +17,7 @@ class PaymentSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('patients')->insert($this->getData());
+        DB::table('payments')->insert($this->getData());
     }
 
     private function getData(): array
@@ -25,7 +25,7 @@ class PaymentSeeder extends Seeder
         $data = [];
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
-                'patient_id' => random_int(1, 10),
+                'patient_id' => random_int(11, 20),
                 'payment_type_id' => random_int(1, 10),
                 'service_id' => random_int(1, 10),
                 'payment_status_id' => random_int(1, 10),

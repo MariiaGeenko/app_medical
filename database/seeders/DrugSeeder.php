@@ -29,6 +29,7 @@ class DrugSeeder extends Seeder
                 'created_at' => \now(),
                 'updated_at' => \now(),
                 'description_url' => \fake()->url(),
+                'pharmacies_id' =>  random_int(1, 10)
             ];
         }
 

@@ -1,9 +1,5 @@
 <?php
 
-
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-
 declare(strict_types=1);
 
 use App\Http\Controllers\DBTestController;
@@ -27,26 +23,8 @@ use App\Http\Controllers\Admin\Video_callController as AdminVideo_callController
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\MessageController;
-use \App\Http\Controllers\ClinicsController;
-use \App\Http\Controllers\Doctor_reviewsController;
-use \App\Http\Controllers\DoctorsController;
-use \App\Http\Controllers\Medical_cardController;
-use \App\Http\Controllers\MeetingsController;
-use \App\Http\Controllers\OrganizationsController;
-use \App\Http\Controllers\PatientsController;
-use \App\Http\Controllers\Payment_statusesController;
-use \App\Http\Controllers\Payment_typesController;
-use \App\Http\Controllers\PaymentsController;
-use \App\Http\Controllers\PharmaciesController;
-use \App\Http\Controllers\ReceiptsController;
-use \App\Http\Controllers\ServicesController;
-use \App\Http\Controllers\Sick_listsController;
-use \App\Http\Controllers\SpecialitiesController;
-use \App\Http\Controllers\Video_callsController;
-
 
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,23 +38,10 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::get('/', [MainController::class, 'index'])->name('main');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function () {
     Route::get('/', [AdminIndexController::class, 'index'])->name('admin');
@@ -96,7 +61,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function () {
     Route::resource('video_calls', AdminVideo_callController::class);
 
     Route::resource('users', AdminUserController::class);
-
 });
 
-require __DIR__.'/auth.php';
+Route::get('/drugs', [DrugController::class, 'index'])->name('drugs');
+Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+
+Route::get('dbtest', DBTestController::class);

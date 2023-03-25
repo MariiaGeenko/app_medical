@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\QueryBuilders\DrugsQueryBuilder;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class DrugController extends Controller
 {
-    /**
-     * @return View
-     */
-    public function index(): View
+
+    public function index()
     {
+        //dd($drugsQueryBuilder);
         return (\view('drugs.index'));
+
+       // $result = $drugsQueryBuilder->getAll()->toJson();
+       // return $result;
     }
+
+
 }

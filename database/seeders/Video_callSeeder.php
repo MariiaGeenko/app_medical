@@ -25,7 +25,7 @@ class Video_callSeeder extends Seeder
         $data = [];
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
-                'meeting_id' => random_int(21, 30),
+                'meeting_id' => random_int(1, 10),
                 'created_at' => \now(),
                 'updated_at' => \now(),
                 'url' => \fake()->url(),

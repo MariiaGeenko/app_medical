@@ -33,6 +33,7 @@ class ClinicSeeder extends Seeder
                 'organization_id' => random_int(1, 5),
                 'created_at' => \now(),
                 'updated_at' => \now(),
+                'organization_types_id' => random_int(1, 10)
             ];
         }
 

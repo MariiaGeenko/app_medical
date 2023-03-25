@@ -33,7 +33,7 @@ class PatientSeeder extends Seeder
                 'name' => \fake()->name(),
                 'surname' => \fake()->name(),
                 'barcode' => \fake()->text(10),
-                'medical_card_stored_in_clinic_id' => random_int(11, 20),
+                'medical_card_stored_in_clinic_id' => random_int(1, 10),
 
             ];
         }
