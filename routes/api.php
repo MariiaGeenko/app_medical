@@ -1,5 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Http\Controllers\Api\DoctorApiController;
+use App\Http\Controllers\DoctorSpecialityController;
+use App\Http\Controllers\PharmaciesHasDrugsController;
 use App\Http\Resources\DrugCollection;
 use App\Models\Drug;
 use Illuminate\Http\Request;
@@ -10,6 +15,9 @@ use \App\Models\Subjects\Pharmacy;
 use \App\Http\Resources\DoctorsCollection;
 use \App\Models\Subjects\Doctor;
 use \App\QueryBuilders\DrugsQueryBuilder;
+use \App\Http\Controllers\Api\PharmacyApiController;
+use \App\Http\Controllers\Api\PatientApiController;
+
 
 
 /*
@@ -32,18 +40,40 @@ Route::get('/drugs', function () {
    // return DrugCollection::collection(DrugsQueryBuilder::getAll());
 });
 
-Route::get('/pharmacies', function () {
-    return PharmacyCollection::collection(Pharmacy::all());
-});
+//Route::get('/pharmacies', function () {
+//    return PharmacyCollection::collection(Pharmacy::all());
+//});
 
-Route::get('/doctors', function () {
-    return DoctorsCollection::collection(Doctor::all());
-});
+//Route::get('/doctors', function () {
+//    return DoctorsCollection::collection(Doctor::all());
+//});
 
 //Route::get('drugs', function () {
 
 //    return response(DrugController::class,200);
 
 //});
+
+//Route::get('/pharmacies', [PharmaciesHasDrugsController::class, 'getPharmaciesHasDrugs']);
+
+
+Route::get('/doctors', [DoctorApiController::class, 'index']);
+
+Route::get('/doctors/speciality/{id}', [DoctorApiController::class, 'getDoctorsWithSpeciality']);
+
+Route::get('/doctors/{id}/receipts', [DoctorApiController::class, 'getDoctorWithReceipts']);
+
+Route::get('/doctors/{id}/patients', [DoctorApiController::class, 'getDoctorWithPatientsWithReceipts']);
+
+
+Route::get('/pharmacies', [PharmacyApiController::class, 'index']);
+
+Route::get('/pharmacies/{id}/drugs', [PharmacyApiController::class, 'getDrugsWithPharmacy']);
+
+
+Route::get('/patients', [PatientApiController::class, 'index']);
+
+
+
 
 
