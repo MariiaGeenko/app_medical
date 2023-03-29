@@ -73,7 +73,6 @@ Route::get('/pharmacies/{id}/drugs', [PharmacyApiController::class, 'getDrugsWit
 Route::get('/pharmacies/drugs/{id}', [PharmacyApiController::class, 'getPharmaciesWithDrugs']);
 
 
-
 Route::get('/patients', [PatientApiController::class, 'index']);
 
 Route::get('/patients/{id}/receipts', [PatientApiController::class, 'getReceiptsWithPatient']);

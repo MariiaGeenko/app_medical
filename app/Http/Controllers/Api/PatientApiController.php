@@ -38,7 +38,7 @@ class PatientApiController extends Controller
             ->leftJoin('pharmacies_has_drugs', 'pharmacies_has_drugs.pharmacy_id', '=', 'pharmacies.id')
             ->leftJoin('receipts', 'receipts.drug_id', '=', 'pharmacies_has_drugs.drugs_id')
             ->select('pharmacies.*')
-            ->where('receipts.drugs_id', '=', $id)
+            ->where('receipts.drug_id', '=', $id)
             ->get();
 
         return \response()->json($pharmacies);
