@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Enum\PharmacyStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -35,6 +36,7 @@ class PharmacySeeder extends Seeder
                 'updated_at' => \now(),
                 'organization_types_id' => random_int(1, 10),
                 'name' => \fake()->name(),
+                'status' => PharmacyStatus::ACTIVE->value,
             ];
         }
 

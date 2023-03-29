@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Enum\PatientStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +35,7 @@ class PatientSeeder extends Seeder
                 'surname' => \fake()->name(),
                 'barcode' => \fake()->text(10),
                 'medical_card_stored_in_clinic_id' => random_int(11, 20),
+                'status' => PatientStatus::ACTIVE->value,
 
             ];
         }

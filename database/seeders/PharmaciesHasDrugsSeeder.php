@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Enum\DrugStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DrugSeeder extends Seeder
+class PharmaciesHasDrugsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,19 +17,17 @@ class DrugSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('drugs')->insert($this->getData());
+        DB::table('pharmacies_has_drugs')->insert($this->getData());
     }
 
     private function getData(): array
     {
         $data = [];
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $data[] = [
-                'name' => \fake()->name(),
-                'created_at' => \now(),
-                'updated_at' => \now(),
-                'description_url' => \fake()->url(),
-                'status' => DrugStatus::ACTIVE->value,
+                'pharmacy_id' => random_int(1, 10),
+                'drugs_id' => random_int(1, 10),
+                'count' => random_int(10, 30)
             ];
         }
 
