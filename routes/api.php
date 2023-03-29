@@ -70,8 +70,15 @@ Route::get('/pharmacies', [PharmacyApiController::class, 'index']);
 
 Route::get('/pharmacies/{id}/drugs', [PharmacyApiController::class, 'getDrugsWithPharmacy']);
 
+Route::get('/pharmacies/drugs/{id}', [PharmacyApiController::class, 'getPharmaciesWithDrugs']);
+
+
 
 Route::get('/patients', [PatientApiController::class, 'index']);
+
+Route::get('/patients/{id}/receipts', [PatientApiController::class, 'getReceiptsWithPatient']);
+
+Route::get('/receipts/{id}/pharmacies', [PatientApiController::class, 'getPharmaciesWithReceipt']);
 
 
 

@@ -29,6 +29,19 @@ class PharmacyApiController extends Controller
             ->where('pharmacy_id', '=', $id)
             ->get();
 
+        return \response()->json($drugs);
+    }
+
+    public function getPharmaciesWithDrugs($id)
+    {
+        $pharmacies = DB::table('pharmacies')
+            ->leftJoin('pharmacies_has_drugs', 'pharmacies_has_drugs.pharmacy_id', '=', 'pharmacies.id')
+            ->leftjoin('drugs', 'drugs.id', '=', 'pharmacies_has_drugs.drugs_id')
+            ->select('pharmacies.*')
+            ->where('drugs_id', '=', $id)
+            ->get();
+
+        return \response()->json($pharmacies);
     }
 }
 
