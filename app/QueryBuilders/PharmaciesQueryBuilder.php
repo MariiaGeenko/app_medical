@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\QueryBuilders;
 
 use App\Models\Subjects\Pharmacy;
@@ -32,7 +34,7 @@ final class PharmaciesQueryBuilder extends QueryBuilder
         return $this->model->paginate($quantity);
     }
 
-    public function getPharmaciesByDrugId (int $drugId): Collection
+    public function getPharmaciesByDrugId(int $drugId): Collection
     {
         return Pharmacy::query()->where('drug_id', $drugId)->get();
     }

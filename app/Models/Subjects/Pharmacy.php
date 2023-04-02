@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models\Subjects;
@@ -25,13 +26,24 @@ use Illuminate\Support\Carbon;
 class Pharmacy extends Model
 {
     use HasFactory;
+
+    protected $table = 'pharmacies';
+
+    protected $attributes = [
+        'organization_id' => 1,
+    ];
+
     protected $fillable = [
         'id',
+        'name',
         'address',
         'phone',
         'email',
         'gps_coordinates',
         'working_modes',
+        //'organization_id',
+        'organization_types_id',
+        'status',
     ];
 
     function drugs(): BelongsToMany

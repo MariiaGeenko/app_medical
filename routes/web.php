@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\DoctorController as AdminDoctorController;
 use App\Http\Controllers\Admin\Doctor_reviewController as AdminDoctor_reviewController;
 use App\Http\Controllers\Admin\MeetingController as AdminMeetingController;
 use App\Http\Controllers\Admin\OrganizationController as AdminOrganizationController;
+use App\Http\Controllers\Admin\OrganizationTypesController as AdminOrganizationTypesController;
 use App\Http\Controllers\Admin\PatientController as AdminPatientController;
 use App\Http\Controllers\Admin\PharmacyController as AdminPharmacyController;
 use App\Http\Controllers\Admin\ReceiptController as AdminReceiptController;
@@ -53,6 +54,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function () {
     Route::resource('doctor_reviews', AdminDoctor_reviewController::class);
     Route::resource('meetings', AdminMeetingController::class);
     Route::resource('organizations', AdminOrganizationController::class);
+    Route::resource('organization_types', AdminOrganizationTypesController::class);
     Route::resource('patients', AdminPatientController::class);
     Route::resource('pharmacies', AdminPharmacyController::class);
     Route::resource('receipts', AdminReceiptController::class);

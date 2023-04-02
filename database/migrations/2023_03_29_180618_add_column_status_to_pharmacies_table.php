@@ -1,6 +1,6 @@
 <?php
 
-use App\Enum\PharmacyStatus;
+use App\Enums\PharmacyStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -1,10 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\DrugStatus;
+use App\Enums\ReceiptStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Receipts\CreateRequest;
+use App\Http\Requests\Receipts\EditRequest;
+use App\Models\Documents\Receipt;
+use App\QueryBuilders\DoctorsQueryBuilder;
+use App\QueryBuilders\DrugsQueryBuilder;
+use App\QueryBuilders\PatientsQueryBuilder;
 use App\QueryBuilders\ReceiptsQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
@@ -27,9 +38,18 @@ class ReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(): View
-    {
-        return \view('admin.receipts.create');
+    public function create(
+        PatientsQueryBuilder $patientsQueryBuilder,
+        DoctorsQueryBuilder $doctorsQueryBuilder,
+        DrugsQueryBuilder $drugsQueryBuilder
+    ): View {
+        $statuses = DrugStatus::all();
+        return \view('admin.receipts.create', [
+            'patients' => $patientsQueryBuilder->getAll(),
+            'doctors' => $doctorsQueryBuilder->getAll(),
+            'drugs' => $drugsQueryBuilder->getAll(),
+            'statuses' => $statuses,
+        ]);
     }
 
     /**
@@ -38,9 +58,15 @@ class ReceiptController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request): RedirectResponse
     {
-        //
+        $receipts = Receipt::create($request->validated());
+
+        if ($receipts->save()) {
+            return redirect()->route('admin.receipts.index')
+                ->with('success', 'Запись успешно добавлена');
+        }
+        return \back()->with('error', 'Не удалось сохранить запись');
     }
 
     /**
@@ -51,7 +77,8 @@ class ReceiptController extends Controller
      */
     public function show($id)
     {
-        //
+        $receipt = Receipt::findOrFail($id);
+        return \view('admin.receipts.show', ['receipt' => $receipt]);
     }
 
     /**
@@ -60,9 +87,20 @@ class ReceiptController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(
+        Receipt $receipt,
+        PatientsQueryBuilder $patientsQueryBuilder,
+        DoctorsQueryBuilder $doctorsQueryBuilder,
+        DrugsQueryBuilder $drugsQueryBuilder
+    ): View {
+        $statuses = ReceiptStatus::all();
+        return \view('admin.receipts.edit', [
+            'receipt' => $receipt,
+            'patients' => $patientsQueryBuilder->getAll(),
+            'doctors' => $doctorsQueryBuilder->getAll(),
+            'drugs' => $drugsQueryBuilder->getAll(),
+            'statuses' => $statuses,
+        ]);
     }
 
     /**
@@ -72,9 +110,15 @@ class ReceiptController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditRequest $request, Receipt $receipt): RedirectResponse
     {
-        //
+        $receipt = $receipt->fill($request->validated());
+
+        if ($receipt->update()) {
+            return redirect()->route('admin.receipts.index')
+                ->with('success', 'Запись успешно обновлена');
+        }
+        return \back()->with('error', 'Не удалось сохранить обновление');
     }
 
     /**
@@ -83,8 +127,15 @@ class ReceiptController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Receipt $receipt)
     {
-        //
+        try {
+            $receipt->delete();
+
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+
+            return \response()->json('error', 400);
+        }
     }
 }

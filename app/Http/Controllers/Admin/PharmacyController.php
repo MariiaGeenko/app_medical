@@ -1,10 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PharmacyStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Pharmacies\CreateRequest;
+use App\Http\Requests\Pharmacies\EditRequest;
+use App\Models\Subjects\Pharmacy;
+use App\QueryBuilders\OrganizationTypesQueryBuilder;
 use App\QueryBuilders\PharmaciesQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PharmacyController extends Controller
@@ -27,9 +35,14 @@ class PharmacyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create(OrganizationTypesQueryBuilder $organizationTypesQueryBuilder): View
     {
-        return \view('admin.pharmacies.create');
+        $statuses = PharmacyStatus::all();
+
+        return \view('admin.pharmacies.create', [
+            'organization_types' => $organizationTypesQueryBuilder->getAll(),
+            'statuses' => $statuses,
+        ]);
     }
 
     /**
@@ -38,9 +51,15 @@ class PharmacyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request): RedirectResponse
     {
-        //
+        $pharmacies = Pharmacy::create($request->validated());
+
+        if ($pharmacies->save()) {
+            return redirect()->route('admin.pharmacies.index')
+                ->with('success', 'Запись успешно добавлена');
+        }
+        return \back()->with('error', 'Не удалось сохранить запись');
     }
 
     /**
@@ -51,7 +70,8 @@ class PharmacyController extends Controller
      */
     public function show($id)
     {
-        //
+        $pharmacy = Pharmacy::findOrFail($id);
+        return \view('admin.pharmacies.show', ['pharmacy' => $pharmacy]);
     }
 
     /**
@@ -60,9 +80,14 @@ class PharmacyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pharmacy $pharmacy, OrganizationTypesQueryBuilder $organizationTypesQueryBuilder): View
     {
-        //
+        $statuses = PharmacyStatus::all();
+        return \view('admin.pharmacies.edit', [
+            'pharmacy' => $pharmacy,
+            'organization_types' => $organizationTypesQueryBuilder->getAll(),
+            'statuses' => $statuses,
+        ]);
     }
 
     /**
@@ -72,9 +97,15 @@ class PharmacyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditRequest $request, Pharmacy $pharmacy): RedirectResponse
     {
-        //
+        $pharmacy = $pharmacy->fill($request->validated());
+
+        if ($pharmacy->update()) {
+            return redirect()->route('admin.pharmacies.index')
+                ->with('success', 'Запись успешно обновлена');
+        }
+        return \back()->with('error', 'Не удалось сохранить обновление');
     }
 
     /**
@@ -83,8 +114,15 @@ class PharmacyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pharmacy $pharmacy)
     {
-        //
+        try {
+            $pharmacy->delete();
+
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+
+            return \response()->json('error', 400);
+        }
     }
 }

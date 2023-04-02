@@ -1,6 +1,6 @@
 <?php
 
-use App\Enum\ClinicStatus;
+use App\Enums\ClinicStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('clinics', function (Blueprint $table) {
-            $table->enum('status', ClinicStatus::all())->default('ACTIVE');
+            $table->enum('status', ClinicStatus::all())->default('ACTIVE')->after('description');
         });
     }
 

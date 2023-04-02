@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enum\ReceiptStatus;
+use App\Enums\ReceiptStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;

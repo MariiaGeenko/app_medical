@@ -13,10 +13,10 @@
             <a class="nav-link" href="{{ route('admin.drugs.index') }}">
               <span data-feather="file"></span>Лекарства</a>
         </li>
-        {{-- <li class="nav-item">
-          <a class="nav-link" href="{{ route('admin.organizations.index') }}">
-            <span data-feather="file"></span>Организации</a>
-        </li> --}}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('admin.organization_types.index') }}">
+            <span data-feather="file"></span>Типы организаций</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('admin.pharmacies.index') }}">
         <span data-feather="file"></span>Аптеки</a>
@@ -53,10 +53,10 @@
           <a class="nav-link" href="{{ route('admin.services.index') }}">
           <span data-feather="file"></span>Сервисы</a>
         </li> --}}
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link" href="{{ route('admin.messages.index') }}">
           <span data-feather="file"></span>Сообщения</a>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a class="nav-link" href="{{ route('admin.users.index') }}">
           <span data-feather="file"></span>Пользователи</a>

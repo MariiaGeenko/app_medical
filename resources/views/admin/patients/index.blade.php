@@ -37,9 +37,8 @@
           <td>{{ $patient->medical_card_stored_in_clinic_id }}</td>
           <td>{{ $patient->created_at }}</td>
           <td>{{ $patient->updated_at }}</td>
-          {{-- <td>{{ $patient->status }}</td> --}}
-          {{-- <td><a href="{{route('admin.patients.edit', $patient->id)}}">Изм.</a> &nbsp; <a href="javascript:;" class="delete" rel="{{ $patient->id }}" style=" color: red;">Уд.</a></td> --}}
-          {{-- <td><a href="#">Изм.</a> &nbsp; <a href="#">Вкл.</a> &nbsp; <a href="#" class="delete" style=" color: red;">Выкл.</a></td> --}}
+          <td>{{ $patient->status }}</td>
+          <td><a href="{{route('admin.patients.edit', $patient->id)}}">Изм.</a> &nbsp; <a href="javascript:;" class="delete" rel="{{ $patient->id }}" style=" color: red;">Уд.</a></td>
         </tr>            
         @empty
         <tr>
@@ -50,11 +49,41 @@
 
     </table>
 
-    {{-- {{ $pagesList->links() }} --}}
+    {{ $patientsList->links() }}
 
   </div>
 
 @endsection
 
+@push('js')
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            let elements = document.querySelectorAll(".delete");
+            elements.forEach(function(e, k) {
+                e.addEventListener("click", function() {
+                const id = this.getAttribute('rel');
+                if(confirm(`Подтверждаете удаление записи с #ID = ${id}`)) {
+                    send(`/admin/patients/${id}`).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    alert("Удаление отменено");
+                }
+            });
+            });
+        });
 
+        async function send(url) {
+            let response = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+
+            let result = await response.json();
+            return result.ok;
+        }
+    </script>
+@endpush
 

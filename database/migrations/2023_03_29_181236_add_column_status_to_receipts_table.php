@@ -1,6 +1,6 @@
 <?php
 
-use App\Enum\ReceiptStatus;
+use App\Enums\ReceiptStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
