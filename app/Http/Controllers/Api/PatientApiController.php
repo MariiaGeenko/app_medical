@@ -42,3 +42,4 @@ class PatientApiController extends Controller
         return \response()->json($pharmacies);
     }
 }
+

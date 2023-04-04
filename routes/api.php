@@ -68,3 +68,4 @@ Route::get('/patients', [PatientApiController::class, 'index']);
 Route::get('/patients/{id}/receipts', [PatientApiController::class, 'getReceiptsWithPatient']);
 
 Route::get('/receipts/{id}/pharmacies', [PatientApiController::class, 'getPharmaciesWithReceipt']);
+
