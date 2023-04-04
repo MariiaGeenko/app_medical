@@ -1,10 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\DrugStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Drugs\CreateRequest;
+use App\Http\Requests\Drugs\EditRequest;
+use App\Models\Drug;
 use App\QueryBuilders\DrugsQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class DrugController extends Controller
@@ -29,7 +36,11 @@ class DrugController extends Controller
      */
     public function create(): View
     {
-        return \view('admin.drugs.create');
+        $statuses = DrugStatus::all();
+
+        return \view('admin.drugs.create', [
+            'statuses' => $statuses,
+        ]);
     }
 
     /**
@@ -38,9 +49,15 @@ class DrugController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request): RedirectResponse
     {
-        //
+        $drugs = Drug::create($request->validated());
+
+        if ($drugs->save()) {
+            return redirect()->route('admin.drugs.index')
+                ->with('success', 'Запись успешно добавлена');
+        }
+        return \back()->with('error', 'Не удалось сохранить запись');
     }
 
     /**
@@ -51,7 +68,8 @@ class DrugController extends Controller
      */
     public function show($id)
     {
-        //
+        $drug = Drug::findOrFail($id);
+        return \view('admin.drugs.show', ['drug' => $drug]);
     }
 
     /**
@@ -60,9 +78,13 @@ class DrugController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Drug $drug)
     {
-        //
+        $statuses = DrugStatus::all();
+        return \view('admin.drugs.edit', [
+            'drug' => $drug,
+            'statuses' => $statuses,
+        ]);
     }
 
     /**
@@ -72,9 +94,15 @@ class DrugController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditRequest $request, Drug $drug): RedirectResponse
     {
-        //
+        $drug = $drug->fill($request->validated());
+
+        if ($drug->update()) {
+            return redirect()->route('admin.drugs.index')
+                ->with('success', 'Запись успешно обновлена');
+        }
+        return \back()->with('error', 'Не удалось сохранить обновление');
     }
 
     /**
@@ -83,8 +111,15 @@ class DrugController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Drug $drug)
     {
-        //
+        try {
+            $drug->delete();
+
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+
+            return \response()->json('error', 400);
+        }
     }
 }

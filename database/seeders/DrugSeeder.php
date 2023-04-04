@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Enums\DrugStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,7 @@ class DrugSeeder extends Seeder
                 'created_at' => \now(),
                 'updated_at' => \now(),
                 'description_url' => \fake()->url(),
+                'status' => DrugStatus::ACTIVE->value,
             ];
         }
 

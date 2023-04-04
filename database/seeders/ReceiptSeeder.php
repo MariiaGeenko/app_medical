@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\ReceiptStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,7 @@ class ReceiptSeeder extends Seeder
                 'valid_until_date' => date_create(),
                 'drug_id' => random_int(1, 10),
                 'barcode' => \fake()->text(10),
+                'status' => ReceiptStatus::ACTIVE->value,
             ];
         }
 

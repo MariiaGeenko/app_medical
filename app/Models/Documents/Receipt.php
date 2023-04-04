@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models\Documents;
@@ -23,11 +24,18 @@ use Illuminate\Support\Carbon;
 class Receipt extends Model
 {
     use HasFactory;
+
+    protected $table = 'receipts';
+
     protected $fillable = [
         'id',
-        'created_date',
+        'name',
         'valid_until_date',
-        'barcode'
+        'barcode',
+        'patient_id',
+        'doctor_id',
+        'drug_id',
+        'status',
     ];
 
     function doctor(): BelongsTo
@@ -38,15 +46,15 @@ class Receipt extends Model
     {
         return $this->belongsTo(Patient::class);
     }
-    function drug():BelongsTo
+    function drug(): BelongsTo
     {
         return $this->belongsTo(Drug::class);
     }
 
 
-    protected $casts = [
-        'created_date' => 'datetime',
-        'valid_until_date' => 'datetime'
-    ];
+    // protected $casts = [
+    //     'created_date' => 'datetime',
+    //     'valid_until_date' => 'datetime'
+    // ];
     public $timestamps = true;
 }

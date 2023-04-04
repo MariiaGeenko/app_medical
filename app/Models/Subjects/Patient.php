@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models\Subjects;
@@ -30,6 +31,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Patient extends Model
 {
     use HasFactory;
+
+    protected $table = 'patients';
+
+    //  $attributes - это заглушки на мусорные связи
+    protected $attributes = [
+        'refresh_token' => 'refresh_token_here',
+        'access_token' => 'access_token_here',
+        'is_online' => '1',
+        'medical_card_stored_in_clinic_id' => 11,
+    ];
+
     protected $fillable = [
         'id',
         'refresh_token',
@@ -38,6 +50,8 @@ class Patient extends Model
         'name',
         'surname',
         'barcode',
+        'medical_card_stored_in_clinic_id',
+        'status',
     ];
 
     function medicalCardStoredInClinic(): BelongsTo

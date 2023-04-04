@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\QueryBuilders;
 
 use App\Models\Drug;
@@ -35,19 +37,17 @@ final class DrugsQueryBuilder extends QueryBuilder
         return $this->model->paginate($quantity);
     }
 
-   // public function getDrugsByPharmacyId (int $pharmacyId): Collection
-  //  {
-  //      return Drugs::query()->where('pharmacies_id', $pharmacyId)->get();
-  //  }
+    // public function getDrugsByPharmacyId (int $pharmacyId): Collection
+    //  {
+    //      return Drugs::query()->where('pharmacies_id', $pharmacyId)->get();
+    //  }
 
-    public function getPharmaciesByDrugId (int $drugId): \Illuminate\Support\Collection
+    public function getPharmaciesByDrugId(int $drugId): \Illuminate\Support\Collection
     {
-       return $drugs = DB::table('drugs')
+        return $drugs = DB::table('drugs')
             ->leftjoin('receipts', 'receipts.drug_id', '=', 'drugs.id')
             ->leftjoin('pharmacies', 'pharmacies.id', '=', 'drugs.pharmacies_id')
             ->select('drugs.name', 'pharmacies.address')
             ->get();
     }
-
-
 }

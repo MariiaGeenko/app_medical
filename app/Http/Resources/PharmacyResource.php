@@ -9,12 +9,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class PharmacyResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resource collection into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-        public function toArray($request)
+
+    public function toArray($request)
     {
         return [
             'id' => $this->id,
@@ -28,5 +29,4 @@ class PharmacyResource extends JsonResource
             'organization_types_id' => $this->organization_types_id,
         ];
     }
-
 }

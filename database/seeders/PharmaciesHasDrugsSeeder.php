@@ -23,7 +23,7 @@ class PharmaciesHasDrugsSeeder extends Seeder
     private function getData(): array
     {
         $data = [];
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $data[] = [
                 'pharmacy_id' => random_int(1, 10),
                 'drugs_id' => random_int(1, 10),
@@ -33,5 +33,4 @@ class PharmaciesHasDrugsSeeder extends Seeder
 
         return $data;
     }
-
 }

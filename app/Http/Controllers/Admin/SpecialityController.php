@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Specialities\CreateRequest;
+use App\Http\Requests\Specialities\EditRequest;
+use App\Models\Speciality;
 use App\QueryBuilders\SpecialitiesQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class SpecialityController extends Controller
@@ -17,6 +23,7 @@ class SpecialityController extends Controller
     public function index(SpecialitiesQueryBuilder $specialitiesQueryBuilder): View
     {
         $specialitiesList = $specialitiesQueryBuilder->getSpecialitiesWithPagination();
+
         return \view('admin.specialities.index', [
             'specialitiesList' => $specialitiesList
         ]);
@@ -38,9 +45,15 @@ class SpecialityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request): RedirectResponse
     {
-        //
+        $specialities = Speciality::create($request->validated());
+
+        if ($specialities->save()) {
+            return redirect()->route('admin.specialities.index')
+                ->with('success', 'Специальность успешно добавлена');
+        }
+        return \back()->with('error', 'Не удалось сохранить запись');
     }
 
     /**
@@ -51,7 +64,8 @@ class SpecialityController extends Controller
      */
     public function show($id)
     {
-        //
+        $speciality = Speciality::findOrFail($id);
+        return \view('admin.specialities.show', ['speciality' => $speciality]);
     }
 
     /**
@@ -60,9 +74,11 @@ class SpecialityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Speciality $speciality)
     {
-        //
+        return \view('admin.specialities.edit', [
+            'speciality' => $speciality,
+        ]);
     }
 
     /**
@@ -72,9 +88,15 @@ class SpecialityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditRequest $request, Speciality $speciality): RedirectResponse
     {
-        //
+        $speciality = $speciality->fill($request->validated());
+
+        if ($speciality->update()) {
+            return redirect()->route('admin.specialities.index')
+                ->with('success', 'Запись успешно обновлена');
+        }
+        return \back()->with('error', 'Не удалось сохранить обновление');
     }
 
     /**
@@ -83,8 +105,15 @@ class SpecialityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Speciality $speciality)
     {
-        //
+        try {
+            $speciality->delete();
+
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+
+            return \response()->json('error', 400);
+        }
     }
 }

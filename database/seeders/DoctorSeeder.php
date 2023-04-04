@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Enums\DoctorStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +37,7 @@ class DoctorSeeder extends Seeder
                 'surname' => \fake()->name(),
                 'education_organization_id' => random_int(1, 8),
                 'status_id' => random_int(1, 9),
+                'status' => DoctorStatus::ACTIVE->value,
             ];
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\QueryBuilders;
 
 use App\Models\Subjects\Clinic;
@@ -31,9 +33,9 @@ final class ClinicsQueryBuilder extends QueryBuilder
     {
         return $this->model->paginate($quantity);
     }
-  //  public function getClinicsWithPagination(int $quantity = 10): LengthAwarePaginator
-   // {
-   //     return $this->model->paginate($quantity);
-   // }
+    //  public function getClinicsWithPagination(int $quantity = 10): LengthAwarePaginator
+    // {
+    //     return $this->model->paginate($quantity);
+    // }
 
 }

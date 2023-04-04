@@ -22,17 +22,28 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Clinic extends Model
 {
     use HasFactory;
+
+    protected $table = 'clinics';
+
+    protected $attributes = [
+        'organization_id' => 1,
+    ];
+
     protected $fillable = [
         'id',
+        'name',
         'address',
         'phone',
         'email',
         'gps_coordinates',
-        'working_modes'
+        'working_modes',
+        'organization_id',
+        'organization_types_id',
+        'status',
     ];
-    protected $casts = [
-        'working_modes' => 'array',
-    ];
+    // protected $casts = [
+    //     'working_modes' => 'array',
+    // ];
 
     function cardByPatients(): HasMany
     {

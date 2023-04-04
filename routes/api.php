@@ -19,7 +19,6 @@ use \App\Http\Controllers\Api\PharmacyApiController;
 use \App\Http\Controllers\Api\PatientApiController;
 
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,25 +36,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/drugs', function () {
     return DrugCollection::collection(Drug::all());
-   // return DrugCollection::collection(DrugsQueryBuilder::getAll());
+    // return DrugCollection::collection(DrugsQueryBuilder::getAll());
 });
 
-//Route::get('/pharmacies', function () {
-//    return PharmacyCollection::collection(Pharmacy::all());
-//});
+// Route::get('/pharmacies', function () {
+//     return PharmacyCollection::collection(Pharmacy::all());
+// });
 
-//Route::get('/doctors', function () {
-//    return DoctorsCollection::collection(Doctor::all());
-//});
-
-//Route::get('drugs', function () {
-
-//    return response(DrugController::class,200);
-
-//});
-
-//Route::get('/pharmacies', [PharmaciesHasDrugsController::class, 'getPharmaciesHasDrugs']);
-
+// Route::get('/doctors', function () {
+//     return DoctorsCollection::collection(Doctor::all());
+// });
 
 Route::get('/doctors', [DoctorApiController::class, 'index']);
 
@@ -78,8 +68,4 @@ Route::get('/patients', [PatientApiController::class, 'index']);
 Route::get('/patients/{id}/receipts', [PatientApiController::class, 'getReceiptsWithPatient']);
 
 Route::get('/receipts/{id}/pharmacies', [PatientApiController::class, 'getPharmaciesWithReceipt']);
-
-
-
-
 

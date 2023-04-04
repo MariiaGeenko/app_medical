@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models\Subjects;
@@ -33,14 +34,30 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Doctor extends Model
 {
     use HasFactory;
+
+    protected $table = 'doctors';
+
+    //  $attributes - это заглушки на мусорные связи
+    protected $attributes = [
+        'refresh_token' => 'refresh_token_here',
+        'access_token' => 'access_token_here',
+        'is_online' => '1',
+        'education_organization_id' => 1,
+        'status_id' => 1,
+    ];
+
     protected $fillable = [
         'id',
         'working_mode',
         'refresh_token',
         'access_token',
         'is_online',
+        'education_organization_id',
+        'speciality_id',
         'name',
         'surname',
+        'status_id',
+        'status',
     ];
 
     function receipts(): HasMany
@@ -76,8 +93,8 @@ class Doctor extends Model
     }
 
 
-    protected $casts = [
-      'working_mode' => 'array',
-    ];
+    // protected $casts = [
+    //     'working_mode' => 'array',
+    // ];
     public $timestamps = true;
 }

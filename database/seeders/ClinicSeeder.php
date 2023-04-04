@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Enums\ClinicStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,7 @@ class ClinicSeeder extends Seeder
         $data = [];
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
+                'name' => \fake()->jobTitle(),
                 'address' => \fake()->address(),
                 'phone' => \fake()->phoneNumber(),
                 'email' => \fake()->email(),
@@ -33,6 +35,7 @@ class ClinicSeeder extends Seeder
                 'organization_id' => random_int(1, 5),
                 'created_at' => \now(),
                 'updated_at' => \now(),
+                'status' => ClinicStatus::ACTIVE->value,
             ];
         }
 

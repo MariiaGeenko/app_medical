@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models;
@@ -18,9 +19,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Drug extends Model
 {
     use HasFactory;
+
+    protected $table = 'drugs';
+
+    protected $attributes = [
+        'pharmacies_id' => 1,
+    ];
+
     protected $fillable = [
         'id',
-        'description_url'
+        'name',
+        'description_url',
+        //'pharmacies_id',
+        'status',
     ];
 
     function receipts(): HasMany
@@ -32,8 +43,8 @@ class Drug extends Model
         return $this->belongsToMany(Pharmacy::class);
     }
 
-    protected $casts = [
-        'availability_pharmacies_ids' => 'array'
-    ];
+    // protected $casts = [
+    //     'availability_pharmacies_ids' => 'array'
+    // ];
     public $timestamps = true;
 }

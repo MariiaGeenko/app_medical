@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\QueryBuilders;
 
 use App\Models\Documents\Receipt;
@@ -31,9 +33,8 @@ final class ReceiptsQueryBuilder extends QueryBuilder
     {
         return $this->model->paginate($quantity);
     }
-    public function getReceiptsByDrugId (int $drugId): Collection
+    public function getReceiptsByDrugId(int $drugId): Collection
     {
         return Receipt::query()->where('drug_id', $drugId)->get();
     }
-
 }
