@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('clinics', function (Blueprint $table) {
-            $table->enum('status', ClinicStatus::all())->default('ACTIVE')->after('description');
+            $table->enum('status', ClinicStatus::all())->default('ACTIVE');
         });
     }
 

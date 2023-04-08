@@ -24,7 +24,7 @@ class ReceiptSeeder extends Seeder
         $data = [];
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
-                'patient_id' => random_int(11, 20),
+                'patient_id' => random_int(1, 10),
                 'doctor_id' => random_int(1, 5),
                 'name' => \fake()->name(),
                 'created_at' => \now(),
