@@ -19,6 +19,7 @@
       <thead>
         <tr>
           <th>#ID</th>
+          <th>Название</th>
           <th>Адрес</th>       
           <th>Телефон</th>
           <th>E-mail</th>
@@ -32,6 +33,7 @@
         @forelse ($pharmaciesList as $pharmacy)
         <tr>
           <td>{{ $pharmacy->id }}</td>
+          <td>{{ $pharmacy->name }}</td>
           <td>{{ $pharmacy->address }}</td>  
           <td>{{ $pharmacy->phone }}</td>
           <td>{{ $pharmacy->email }}</td>

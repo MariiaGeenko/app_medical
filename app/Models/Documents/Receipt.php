@@ -27,10 +27,14 @@ class Receipt extends Model
 
     protected $table = 'receipts';
 
+    protected $attributes = [
+        'valid_until_date' => '2099-01-01',
+    ];
+
     protected $fillable = [
         'id',
         'name',
-        'valid_until_date',
+        //'valid_until_date',
         'barcode',
         'patient_id',
         'doctor_id',

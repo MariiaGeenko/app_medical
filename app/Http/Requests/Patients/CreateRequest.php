@@ -32,6 +32,7 @@ class CreateRequest extends FormRequest
             'surname' => ['required', 'string', 'min:5', 'max:200'],
             'barcode' => ['required', 'string', 'min:10'],
             'status' => ['required', new Enum(PatientStatus::class)],
+            'insurance' => ['sometimes'],
         ];
     }
 }

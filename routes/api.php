@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
+// это рабочие юзы до установки бриз
 use App\Http\Controllers\Api\DoctorApiController;
 use App\Http\Controllers\DoctorSpecialityController;
 use App\Http\Controllers\PharmaciesHasDrugsController;
 use App\Http\Resources\DrugCollection;
 use App\Models\Drug;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\DrugController;
 use \App\Http\Resources\PharmacyCollection;
 use \App\Models\Subjects\Pharmacy;
@@ -18,6 +19,10 @@ use \App\QueryBuilders\DrugsQueryBuilder;
 use \App\Http\Controllers\Api\PharmacyApiController;
 use \App\Http\Controllers\Api\PatientApiController;
 
+
+// при установке бриз были только эти юзы
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +35,12 @@ use \App\Http\Controllers\Api\PatientApiController;
 |
 */
 
+// при установке бриз был только этот роут
+Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+// это рабочие роуты до установки бриз
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -68,4 +79,3 @@ Route::get('/patients', [PatientApiController::class, 'index']);
 Route::get('/patients/{id}/receipts', [PatientApiController::class, 'getReceiptsWithPatient']);
 
 Route::get('/receipts/{id}/pharmacies', [PatientApiController::class, 'getPharmaciesWithReceipt']);
-

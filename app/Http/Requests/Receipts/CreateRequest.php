@@ -27,7 +27,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:2', 'max:200'],
-            'valid_until_date' => ['required', 'string', 'min:2', 'max:200'],
+            //'valid_until_date' => ['required', 'string', 'min:2', 'max:200'],
             'patient_id' => ['required'],
             'doctor_id' => ['required'],
             'drug_id' => ['required'],

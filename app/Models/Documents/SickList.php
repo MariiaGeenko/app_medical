@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models\Documents;
 
+use App\Models\Diagnosis;
 use App\Models\Subjects\Doctor;
 use App\Models\Subjects\Patient;
 use Carbon\Carbon;
@@ -21,14 +23,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SickList extends Model
 {
     use HasFactory;
+
+    protected $table = 'sick_lists';
+
     protected $fillable = [
         'id',
         'description',
-        'created_date',
-        'valid_until_date'
+        // 'created_date',
+        'valid_until_date',
+        'diagnosis_id',
+        'receipt_id',
+        'patient_id',
+        'doctor_id',
     ];
     protected $casts = [
-        'created_date' => 'datetime',
+        // 'created_date' => 'datetime',
         'valid_until_date' => 'datetime',
     ];
 
@@ -39,6 +48,14 @@ class SickList extends Model
     function doctor(): BelongsTo
     {
         return $this->belongsTo(Doctor::class);
+    }
+    function diagnosis(): BelongsTo
+    {
+        return $this->belongsTo(Diagnosis::class);
+    }
+    function receipt(): BelongsTo
+    {
+        return $this->belongsTo(Receipt::class);
     }
 
     public $timestamps = true;

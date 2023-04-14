@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+// это рабочие юзы до установки бриз
 use App\Http\Controllers\DBTestController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
@@ -20,12 +21,16 @@ use App\Http\Controllers\Admin\ReceiptController as AdminReceiptController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\SpecialityController as AdminSpecialityController;
 use App\Http\Controllers\Admin\Video_callController as AdminVideo_callController;
+use App\Http\Controllers\Admin\DiagnosisController as AdminDiagnosisController;
 
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\MessageController;
 
+// при установке бриз был только этот юз
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +42,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// при установке бриз был только этот роут
 Route::get('/', function () {
-    return view('welcome');
+    return ['Laravel' => app()->version()];
 });
+
+require __DIR__ . '/auth.php';
+
+// это рабочие роуты до установки бриз
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/', [MainController::class, 'index'])->name('main');
 
@@ -61,6 +74,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function () {
     Route::resource('services', AdminServiceController::class);
     Route::resource('specialities', AdminSpecialityController::class);
     Route::resource('video_calls', AdminVideo_callController::class);
+    Route::resource('diagnoses', AdminDiagnosisController::class);
 
     Route::resource('users', AdminUserController::class);
 });

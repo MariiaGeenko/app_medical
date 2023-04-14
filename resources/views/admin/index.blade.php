@@ -5,13 +5,38 @@
             <h1 class="h2">Админ. панель сайта</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
+                {{-- <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button> --}}
               </div>
             </div>
           </div>
           <div class="table-responsive">
-            Здесь админ. панель сайта
+           <p>В этом разделе сайта пользователь с правами администратора</p>
+            <p>может создавать, редактировать и удалять записи в базе данных </p>
+            <p>по тематическим разделам:</p>
+            <div>
+              <a href="{{route('admin.receipts.index')}}">Рецепты</a>
+              <br>
+              <a href="{{route('admin.drugs.index')}}">Лекарства</a>
+              <br>
+              <a href="{{route('admin.pharmacies.index')}}">Аптеки</a>
+              <br>
+              <a href="{{route('admin.clinics.index')}}">Клиники</a>
+              <br>
+              <a href="{{route('admin.doctors.index')}}">Врачи</a>
+              <br>
+              <a href="{{route('admin.patients.index')}}">Пациенты</a>
+              <br>
+              <a href="{{route('admin.users.index')}}">Пользователи</a>
+              <br>
+              <p>а также справочники:</p>              
+              <a href="{{route('admin.organization_types.index')}}">Типы организаций</a>
+              <br>
+              <a href="{{route('admin.specialities.index')}}">Специальности врачей</a>
+              <br>
+              <a href="{{route('admin.diagnoses.index')}}">Справочник заболеваний</a>
+            </div>
+
             {{-- @include('inc.info', ['status' => 'complete']) --}}
             {{-- <x-alert type="info" message="Это информационное сообщение"></x-alert>
             <x-alert type="danger" message="Это информационное сообщение"></x-alert>

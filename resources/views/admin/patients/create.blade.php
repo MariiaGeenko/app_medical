@@ -39,6 +39,10 @@
             <label for="medical_card_stored_in_clinic_id">Номер медицинской карты</label>
             <input type="text" id="medical_card_stored_in_clinic_id" name="medical_card_stored_in_clinic_id" class="form-control @error('medical_card_stored_in_clinic_id') is-invalid @enderror" value="{{ old('medical_card_stored_in_clinic_id')}}">
         </div>
+        <div class="form-group">
+          <label for="insurance">Страховка</label>
+          <input type="text" id="insurance" name="insurance" class="form-control @error('insurance') is-invalid @enderror" value="{{ old('insurance')}}">
+        </div>
 
         <div class="form-group">
         <label for="status">Статус</label>

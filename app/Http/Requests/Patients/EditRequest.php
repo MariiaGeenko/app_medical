@@ -33,6 +33,7 @@ class EditRequest extends FormRequest
             'barcode' => ['required', 'string', 'min:10'],
             'medical_card_stored_in_clinic_id' => ['required', 'string', 'min:2'],
             'status' => ['required', new Enum(PatientStatus::class)],
+            'insurance' => ['sometimes'],
         ];
     }
 }

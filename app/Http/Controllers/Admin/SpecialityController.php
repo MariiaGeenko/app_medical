@@ -74,7 +74,7 @@ class SpecialityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Speciality $speciality)
+    public function edit(Speciality $speciality): View
     {
         return \view('admin.specialities.edit', [
             'speciality' => $speciality,

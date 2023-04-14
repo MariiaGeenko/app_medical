@@ -52,6 +52,7 @@ class Patient extends Model
         'barcode',
         'medical_card_stored_in_clinic_id',
         'status',
+        'insurance',
     ];
 
     function medicalCardStoredInClinic(): BelongsTo

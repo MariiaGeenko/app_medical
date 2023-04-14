@@ -31,6 +31,8 @@ class Sick_listSeeder extends Seeder
                 'created_at' => \now(),
                 'updated_at' => \now(),
                 'valid_until_date' => date_create(),
+                'diagnosis_id' => random_int(1, 10),
+                'receipt_id' => random_int(11, 23),
             ];
         }
 

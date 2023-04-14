@@ -36,6 +36,7 @@ class PatientSeeder extends Seeder
                 'barcode' => \fake()->text(10),
                 'medical_card_stored_in_clinic_id' => random_int(11, 20),
                 'status' => PatientStatus::ACTIVE->value,
+                'insurance' => \fake()->text(10),
 
             ];
         }
