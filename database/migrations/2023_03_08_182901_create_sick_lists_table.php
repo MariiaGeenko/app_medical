@@ -17,8 +17,7 @@ return new class extends Migration
     {
         Schema::create('sick_lists', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->constrained();
-            $table->foreignId('doctor_id')->constrained();
+            $table->foreignId('receipt')->constrained();
             $table->text('description');
             $table->timestamps();
             $table->date('valid_until_date');

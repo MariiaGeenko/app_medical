@@ -19,6 +19,7 @@
       <thead>
         <tr>
           <th>#ID</th>
+          <th>Название</th>
           <th>Адрес</th>       
           <th>Телефон</th>
           <th>E-mail</th>
@@ -32,6 +33,7 @@
         @forelse ($clinicsList as $clinic)
         <tr>
           <td>{{ $clinic->id }}</td>
+          <td>{{ $clinic->name }}</td>
           <td>{{ $clinic->address }}</td>  
           <td>{{ $clinic->phone }}</td>
           <td>{{ $clinic->email }}</td>

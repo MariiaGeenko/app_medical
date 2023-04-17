@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'http://localhost:5588/api/doctors/register/patient',
+        'http://localhost:5588/api/signIn'
     ];
 }
